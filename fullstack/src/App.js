@@ -11,6 +11,15 @@ const Stats = (props) => {
     </div>
   )
 }
+
+const Push = (props) => {
+  return (
+  <>
+  <button onClick={props.handleClickGood}>{props.text}</button>
+  </>
+  )
+}
+
 const App = () => {
   // tallenna napit omaan tilaansa
   const [good, setGood] = useState(0)
@@ -40,7 +49,7 @@ const App = () => {
       <h2>Stats</h2>
       {!showStats ? <Stats bad={bad} good={good} neutral={neutral} showStats={showStats}/> : null}
       <h2>Buttons</h2>
-      <button onClick={handleClickGood}>Good</button>
+      <Push handleClickGood={handleClickGood} text='Good'/>
       <button onClick={handleClickNeutral}>Neutral</button>
       <button onClick={handleClickBad}>Bad</button>
     </div>
