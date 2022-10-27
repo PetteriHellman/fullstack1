@@ -18,7 +18,7 @@ const Bad = (props) => {
 
 const Average = (props) => {
   return (
-      <div><p>Average {props.bad}+{props.good}+{props.neutral}</p></div>
+      <div><p>Average {props.bad+props.good+props.neutral}</p></div>
   )
 }
 
@@ -47,6 +47,7 @@ const App = () => {
       <Good good={good} />
       <Neutral neutral={neutral}/>
       <Bad bad={bad}/>
+      <Average average={Average}/>
       <button onClick={handleClickGood}>Good</button>
       <button onClick={handleClickNeutral}>Neutral</button>
       <button onClick={handleClickBad}>Bad</button>
