@@ -16,6 +16,12 @@ const Bad = (props) => {
   )
 }
 
+const Average = (props) => {
+  return (
+      <div><p>Average {props.bad}+{props.good}+{props.neutral}</p></div>
+  )
+}
+
 const App = () => {
   // tallenna napit omaan tilaansa
   const [good, setGood] = useState(0)
