@@ -16,17 +16,21 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+  const [showStats, setShowStats] = useState(true)
 
   const handleClickGood = () => {
     setGood(good + 1)
+    setShowStats(false)
   }
 
   const handleClickNeutral = () => {
     setNeutral(neutral + 1)
+    setShowStats(false)
   }
 
   const handleClickBad = () => {
     setBad(bad + 1)
+    setShowStats(false)
   }
   
 
@@ -34,7 +38,7 @@ const App = () => {
   return (
     <div>
       <h2>Stats</h2>
-      <Stats bad={bad} good={good} neutral={neutral}/>
+      {!showStats ? <Stats bad={bad} good={good} neutral={neutral} showStats={showStats}/> : null}
       <h2>Buttons</h2>
       <button onClick={handleClickGood}>Good</button>
       <button onClick={handleClickNeutral}>Neutral</button>
