@@ -1,7 +1,9 @@
 
 const Course = (props) => {
   console.log(props)
+  
   return (
+    <><p>{props.mapping[1]}</p></>
     
   )
 }
@@ -30,9 +32,10 @@ const App = () => {
 
     }
 
-    const mapping = course.map(course => course.id)
-  
-    return <Course course={course} />
+    const mapping = course.parts.map(course => course.parts)
+    
+    return ( <Course mapping={course} />
+    )
   }
 
 export default App
