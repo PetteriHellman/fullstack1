@@ -1,5 +1,5 @@
-import { useState } from 'react'
-const Stats = (props) => {
+
+const Course = (props) => {
   return (
     <div>
       <div><p> Good {props.good} </p></div>
@@ -12,49 +12,30 @@ const Stats = (props) => {
   )
 }
 
-const Push = (props) => {
-  return (
-  <>
-  <button onClick={props.handleClick}>{props.text}</button>
-  </>
-  )
-}
-
-
 const App = () => {
-  // tallenna napit omaan tilaansa
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
-  const [showStats, setShowStats] = useState(true)
-
-  const handleClickGood = () => {
-    setGood(good + 1)
-    setShowStats(false)
+  const course = {
+    id: 1,
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10,
+        id: 1
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7,
+        id: 2
+      },
+      {
+        name: 'State of a component',
+        exercises: 14,
+        id: 3
+      }
+    ]
   }
 
-  const handleClickNeutral = () => {
-    setNeutral(neutral + 1)
-    setShowStats(false)
-  }
-
-  const handleClickBad = () => {
-    setBad(bad + 1)
-    setShowStats(false)
-  }
-  
-
-
-  return (
-    <div>
-      <h2>Stats</h2>
-      {!showStats ? <Stats bad={bad} good={good} neutral={neutral} showStats={showStats}/> : null}
-      <h2>Buttons</h2>
-      <Push handleClick={handleClickGood} text='Good'/>
-      <Push handleClick={handleClickNeutral} text='Neutral'/>
-      <Push handleClick={handleClickBad} text='Bad'/>
-    </div>
-  )
+  return <Course course={course} />
 }
 
 export default App
