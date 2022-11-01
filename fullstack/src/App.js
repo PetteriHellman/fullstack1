@@ -1,36 +1,5 @@
- const Header = (props) => {
-   console.log(props)
-   return (
-    
-     <><h1>{props.mapped}</h1></>
-   )
- }
-
-
-// const Content = (props) => {
-//   console.log(props)
-//   return (
-//     <>
-//         {props.parts.map(part => <p key={part.id}>
-//           {part.name} {part.exercises}</p>)}
-//         </>
-    
-//   )
-// }
-
-// const Total = (props) => {
-//   console.log(props)
-//   const exercises = props.parts.map((part) => part.exercises)
-//   const sum = exercises.reduce((previous, current)=>previous + current, 0)
-//   return (
-//     <p>Total exercises {sum}</p>
-//   )
-
-// }
-
-
-  
-
+import React from "react"
+import Courses from './components/Courses'
 
 const App = () => {
   const courses = [
@@ -77,13 +46,10 @@ const App = () => {
       ]
     }
   ]
-  const mapped = courses.map(map => map.parts)
-  console.log(mapped)
+  
     return (
     <div>
-      <Header mapped = {mapped.parts} />
-      {/* <Content parts = {courses.parts} />
-      <Total parts = {courses.parts} />  */}
+      <Courses courses = {courses} />
     </div>
     )
     
