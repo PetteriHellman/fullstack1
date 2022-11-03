@@ -1,8 +1,40 @@
 import { useState } from 'react'
 // import Numbers from './components/numbers'
 
-
-
+const ShowList = (props) => {
+  return(
+    <>
+    {props.persons.map(person =>
+      <li key={person.id}>{person.name} {person.number}</li> 
+        )}
+    </>
+  )
+}
+const MakePhonebook = (props) => {
+  return(
+    <div>
+    <h2>Phonebook</h2>
+      <form onSubmit={props.addPerson}>
+        <div>
+          name: <input 
+            value={props.newName}
+            onChange={props.handleNewName}
+            />
+          
+        </div>
+        <div>
+            Number: <input 
+            value={props.newNumber}
+            onChange={props.hanldeNewNumber}/>
+          </div>
+        <div>
+          <button type="submit">add</button>
+        </div>
+      </form>
+      <h2>Numbers</h2>
+    </div>
+  )
+}
 const App = () => {
   const [persons, setPersons] = useState([
     { 
@@ -28,12 +60,12 @@ const App = () => {
   }
 
   const handleNewName = (event) => {
-    console.log(event.target.value)
+    
     setNewName(event.target.value)
   }
 
   const hanldeNewNumber = (event) => {
-    console.log(event.target.value)
+    
     setNewNumber(event.target.value)
   }
 
@@ -42,30 +74,11 @@ const App = () => {
   return (
     
     <div>
-      debug: {newName}
-      <h2>Phonebook</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input 
-            value={newName}
-            onChange={handleNewName}
-            />
-          
-        </div>
-        <div>
-            Number: <input 
-            value={newNumber}
-            onChange={hanldeNewNumber}/>
-          </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
+      <MakePhonebook addPerson={addPerson} newName={newName} 
+      handleNewName={handleNewName} newNumber={newNumber} 
+      hanldeNewNumber={hanldeNewNumber}/>
         <ul>
-            {persons.map(person =>
-            <li key={person.id}>{person.name} {person.number}</li> 
-              )}
+            <ShowList persons={persons} id={persons.id} name={persons.number}/>
         </ul>
     </div>
   )
