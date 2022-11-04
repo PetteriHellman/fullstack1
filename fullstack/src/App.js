@@ -1,5 +1,5 @@
-import { useState } from 'react'
-// import Numbers from './components/numbers'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const ShowList = (props) => {
   return(
@@ -69,7 +69,18 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
-  // console.log(persons.includes(newName))
+  useEffect(()=> {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        console.log('promise fulfilled')
+        setPersons(response.data)
+
+      })
+  }, [])
+
+   console.log(persons)
 
   return (
     
