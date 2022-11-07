@@ -1,40 +1,10 @@
 import { useEffect, useState } from 'react'
+import MakePhonebook from './components/makingForm'
+import ShowList from './components/showingsomelist'
+import dataService from './services/persons'
+import GetAll from './services/persons'
 import axios from 'axios'
 
-const ShowList = (props) => {
-  return(
-    <>
-    {props.persons.map(person =>
-      <li key={person.id}>{person.name} {person.number}</li> 
-        )}
-    </>
-  )
-}
-const MakePhonebook = (props) => {
-  return(
-    <div>
-    <h2>Phonebook</h2>
-      <form onSubmit={props.addPerson}>
-        <div>
-          name: <input 
-            value={props.newName}
-            onChange={props.handleNewName}
-            />
-          
-        </div>
-        <div>
-            Number: <input 
-            value={props.newNumber}
-            onChange={props.hanldeNewNumber}/>
-          </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-    </div>
-  )
-}
 const App = () => {
   const [persons, setPersons] = useState([
     { 
@@ -54,9 +24,14 @@ const App = () => {
       number: newNumber,
       id: persons.length +1,
     }
-    setPersons(persons.concat(personObj))
-    setNewName('')
-    setNewNumber('')
+
+    dataService
+    .create(personObj)
+    .then(returnedData => {
+      setPersons(persons.concat(returnedData))
+      setNewName('')
+      setNewNumber('')
+    })
   }
 
   const handleNewName = (event) => {
@@ -69,18 +44,24 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
-  useEffect(()=> {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        setPersons(response.data)
-
+  useEffect(() => {
+    dataService
+      .GetAll()
+        .then(initialData => {
+        setPersons(initialData)
       })
   }, [])
 
-   console.log(persons)
+  const deletePerson = id => {
+    const dude = persons.find(n => n.id === id)
+    if (window.confirm(`Would you like to yeet ${dude.name}`) === true){
+      dataService
+      .deleteObject(dude.id)
+      .then(() => {
+        setPersons(persons.filter((dude)=> dude.id !== id))
+      })
+    }
+  }
 
   return (
     
@@ -89,7 +70,7 @@ const App = () => {
       handleNewName={handleNewName} newNumber={newNumber} 
       hanldeNewNumber={hanldeNewNumber}/>
         <ul>
-            <ShowList persons={persons} id={persons.id} name={persons.number}/>
+            <ShowList persons={persons} id={persons.id} name={persons.number} deletePerson={deletePerson}/>
         </ul>
     </div>
   )
